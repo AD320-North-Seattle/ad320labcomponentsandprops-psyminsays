@@ -9,7 +9,7 @@ const RecipeContainer = (WrappedComponent) => {
     useEffect(() => {
       async function fetchRecipes() {
         try {
-          const response = await fetch('https://api.example.com/recipes'); // Replace with your API endpoint
+          const response = await fetch('https://api.example.com/recipes'); // Replace with your actual API endpoint
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
@@ -25,6 +25,7 @@ const RecipeContainer = (WrappedComponent) => {
       fetchRecipes();
     }, []);
 
+    // Correctly utilize WrappedComponent here
     return (
       <div>
         {loading && <p>Loading...</p>}
