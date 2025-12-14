@@ -1,39 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Recipe from './Recipe'; // Import the Recipe component
 
-const RecipeContainer = (WrappedComponent) => {
-  return function EnhancedComponent(props) {
-    const [recipes, setRecipes] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+const RecipeContainer = ({ recipes }) => {
+  return (
+    <div style={containerStyle}>
+      {recipes.length === 0 ? (
+        <p>No Recipes Found</p>
+      ) : (
+        recipes.map((recipe) => (
+          <Recipe key={recipe.id} recipe={recipe} /> // Pass individual recipe as prop
+        ))
+      )}
+    </div>
+  );
+};
 
-    useEffect(() => {
-      async function fetchRecipes() {
-        try {
-          const response = await fetch('https://api.example.com/recipes'); // Replace with your actual API endpoint
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const data = await response.json();
-          setRecipes(data);
-        } catch (error) {
-          setError(error.message);
-        } finally {
-          setLoading(false);
-        }
-      }
-
-      fetchRecipes();
-    }, []);
-
-    // Correctly utilize WrappedComponent here
-    return (
-      <div>
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        {!loading && !error && <WrappedComponent recipes={recipes} {...props} />}
-      </div>
-    );
-  };
+// Style for the container (you can customize this)
+const containerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '20px',
+  backgroundColor: '#f4f4f4',
 };
 
 export default RecipeContainer;
