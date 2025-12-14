@@ -8,20 +8,20 @@ const RecipeContainer = ({ recipes }) => {
         <p>No Recipes Found</p>
       ) : (
         recipes.map((recipe) => (
-          <Recipe key={recipe.id} recipe={recipe} /> // Pass individual recipe as prop
+          <Recipe key={recipe.id} recipe={recipe} />
         ))
       )}
     </div>
   );
 };
 
-// Style for the container (you can customize this)
+// Style for the container
 const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   padding: '20px',
-  backgroundColor: '#f4f4f4',
+  backgroundColor: '#FFEDD5', // Light orange background
 };
 
 export default RecipeContainer;
